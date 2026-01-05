@@ -1,17 +1,20 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class SurferMovement : MonoBehaviour
 {
     public float cubeSpeed = 8.0f;
-    bool L, M, R;
+    bool L, M, R, Jumped;
 
     void Start()
     {
         L = false;
         R = false;
         M = true;
+        Jumped = false;
     }
 
     void Update()
@@ -27,7 +30,8 @@ public class SurferMovement : MonoBehaviour
                 L = true;
                 M = false;
             }
-            else if (R == true) {
+            else if (R == true)
+            {
                 transform.DOMoveX(0, 0.3f);
                 L = false;
                 M = true;
@@ -51,37 +55,20 @@ public class SurferMovement : MonoBehaviour
                 L = false;
             }
         }
-
-        /*if(Keyboard.current.aKey.wasPressedThisFrame && L == false || M == true)
+        if (Keyboard.current.wKey.wasPressedThisFrame && Jumped == false)
         {
-            transform.DOMoveX(-1.75f, 0.3f);
-            if (M == true)
-            {
-                transform.DOMoveX(-1.75f, 0.3f);
-                L = true;
-                M = false;
-            }
-            else
-            {
-                transform.DOMoveX(0.00f, 0.3f);
-                M = true;
-            }
-
+            Jumped = true;
+            StartCoroutine(Delay());
         }
+    }
 
-        if (Keyboard.current.dKey.wasPressedThisFrame && R == false || M == true)
-        {
-            if (M == true)
-            {
-                transform.DOMoveX(1.75f, 0.3f);
-                L = true;
-                M = false;
-            }
-            else
-            {
-                transform.DOMoveX(0.00f, 0.3f);
-                M = true;
-            }
-        }*/
+    IEnumerator Delay()
+    {
+        transform.DOMoveY(2, 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        transform.DOMoveY(0, 0.18f);
+        yield return new WaitForSeconds(0.14f);
+        Jumped = false;
+
     }
 }
