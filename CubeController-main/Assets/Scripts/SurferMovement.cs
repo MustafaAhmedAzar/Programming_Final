@@ -66,8 +66,8 @@ public class SurferMovement : MonoBehaviour
     {
         transform.DOMoveY(2, 0.2f);
         yield return new WaitForSeconds(0.2f);
-        transform.DOMoveY(0, 0.18f);
-        yield return new WaitForSeconds(0.14f);
+        transform.DOMoveY(0, 0.2f);
+        yield return new WaitForSeconds(0.2f);
         Jumped = false;
 
     }
